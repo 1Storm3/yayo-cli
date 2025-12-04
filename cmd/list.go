@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"strings"
 	"text/tabwriter"
 
 	"golang.org/x/term"
@@ -50,6 +51,13 @@ var listEnvSSHCmd = &cobra.Command{
 
 		if err := json.Unmarshal([]byte(output), &envItems); err != nil {
 			return fmt.Errorf("не удалось распарсить JSON: %w", err)
+		}
+
+		trimmedOutput := strings.TrimSpace(output)
+		if trimmedOutput != "" {
+			if err := json.Unmarshal([]byte(trimmedOutput), &envItems); err != nil {
+				return fmt.Errorf("не удалось распарсить JSON: %w", err)
+			}
 		}
 
 		w := tabwriter.NewWriter(os.Stdout, 0, 0, 2, ' ', 0)

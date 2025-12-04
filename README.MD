@@ -6,7 +6,7 @@ yayo-cli — CLI утилита для управления ENV переменн
 
 Установи утилиту:
 
-`go install github.com/1Storm3/yayo-cli.git`
+`go install github.com/1Storm3/yayo-cli`
 
 ## Использование
 Команды
