@@ -61,7 +61,7 @@ var pushCmd = &cobra.Command{
 
 		output, err := ssh.RunSSHWithStdin(host, remoteCmd, string(data))
 		if err != nil {
-			return fmt.Errorf("ошибка при пуше: %w", err)
+			return fmt.Errorf("не удалось подключиться или неверный пароль")
 		}
 
 		fmt.Println(output)

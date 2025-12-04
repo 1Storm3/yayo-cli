@@ -40,7 +40,7 @@ var listEnvSSHCmd = &cobra.Command{
 
 		output, err := ssh.RunSSHWithStdin(host, remoteCmd, password+"\n")
 		if err != nil {
-			return fmt.Errorf("ошибка при выполнении удалённой команды: %w", err)
+			return fmt.Errorf("не удалось подключиться или неверный пароль")
 		}
 
 		var envItems []struct {
