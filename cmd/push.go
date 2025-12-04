@@ -58,6 +58,7 @@ var pushCmd = &cobra.Command{
 			"yayo-cli add-bulk-r --project %s --password '%s'",
 			project, password,
 		)
+		fmt.Println("JSON для отправки:", string(data))
 
 		output, err := ssh.RunSSHWithStdin(host, remoteCmd, string(data))
 		if err != nil {

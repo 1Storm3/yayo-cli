@@ -8,16 +8,11 @@ import (
 )
 
 func InitSQLCipher(path, password string) error {
-	db, err := sql.Open("sqlite3", path)
+	db, err := sql.Open("sqlite3", fmt.Sprintf("%s?_pragma_key=%s", path, password))
 	if err != nil {
 		return err
 	}
 	defer db.Close()
-
-	_, err = db.Exec(fmt.Sprintf("PRAGMA key = '%s';", password))
-	if err != nil {
-		return err
-	}
 
 	return nil
 }
