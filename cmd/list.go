@@ -30,7 +30,7 @@ var listEnvSSHCmd = &cobra.Command{
 		}
 		password := string(passwordBytes)
 
-		remoteCmd := fmt.Sprintf("yayo list-r --project %s", project)
+		remoteCmd := fmt.Sprintf("yayo-cli list-r --project %s", project)
 		if service != "" {
 			remoteCmd += fmt.Sprintf(" --service %s", service)
 		}

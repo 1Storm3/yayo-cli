@@ -8,9 +8,9 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "yayo",
-	Short: "Yayo — локальный менеджер ENV переменных с безопасным хранилищем",
-	Long:  `Yayo — CLI утилита для управления ENV переменными проектов. Хранение: локальная SQLCipher база.`,
+	Use:   "yayo-cli",
+	Short: "Yayo-cli — локальный менеджер ENV переменных с безопасным хранилищем",
+	Long:  `Yayo-cli — CLI утилита для управления ENV переменными проектов. Хранение: локальная SQLCipher база.`,
 }
 
 func Execute() {

@@ -55,7 +55,7 @@ var pushCmd = &cobra.Command{
 		}
 
 		remoteCmd := fmt.Sprintf(
-			"yayo add-bulk-r --project %s --password '%s'",
+			"yayo-cli add-bulk-r --project %s --password '%s'",
 			project, password,
 		)
 
