@@ -6,8 +6,7 @@ on:
       - "v*"
 
 jobs:
-  build:
-    name: Build release binaries
+  release:
     runs-on: ubuntu-latest
 
     strategy:
@@ -16,7 +15,7 @@ jobs:
         goarch: [amd64, arm64]
 
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up Go
@@ -27,28 +26,11 @@ jobs:
       - name: Build binary
         run: |
           mkdir -p dist
-          OUTPUT="dist/yayo-cli_${{ matrix.goos }}-${{ matrix.goarch }}"
-          GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -o $OUTPUT
-          echo "Built: $OUTPUT"
+          BIN_NAME="yayo-cli_${{ matrix.goos }}-${{ matrix.goarch }}"
+          echo "Building $BIN_NAME"
+          GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -o dist/$BIN_NAME
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: binaries
-          path: dist/*
-
-  release:
-    name: Create GitHub Release
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: binaries
-
-      - name: Create Release
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           files: dist/*
