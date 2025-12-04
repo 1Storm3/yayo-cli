@@ -16,11 +16,11 @@ var listEnvCmd = &cobra.Command{
 	Use:   "list-envs",
 	Short: "Выводит список ENV переменных проекта",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		project, _ := cmd.Flags().GetString("project")
-		service, _ := cmd.Flags().GetString("service")
+		project, _ := cmd.Flags().GetString("p")
+		service, _ := cmd.Flags().GetString("s")
 
 		if project == "" {
-			return fmt.Errorf("необходимо указать --project")
+			return fmt.Errorf("необходимо указать --p")
 		}
 
 		reader := bufio.NewReader(os.Stdin)
@@ -81,7 +81,7 @@ var listEnvCmd = &cobra.Command{
 }
 
 func init() {
-	listEnvCmd.Flags().String("project", "", "Название проекта")
-	listEnvCmd.Flags().String("service", "", "Фильтр по сервису (необязательно)")
+	listEnvCmd.Flags().String("p", "", "Название проекта")
+	listEnvCmd.Flags().String("s", "", "Фильтр по сервису (необязательно)")
 	RootCmd.AddCommand(listEnvCmd)
 }

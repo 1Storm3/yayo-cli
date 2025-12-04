@@ -16,10 +16,10 @@ var pushCmd = &cobra.Command{
 	Use:   "push",
 	Short: "Загружает локальный .env на удалённую машину через SSH",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		host, _ := cmd.Flags().GetString("host")
-		service, _ := cmd.Flags().GetString("service")
-		project, _ := cmd.Flags().GetString("project")
-		filePath, _ := cmd.Flags().GetString("file")
+		host, _ := cmd.Flags().GetString("h")
+		service, _ := cmd.Flags().GetString("s")
+		project, _ := cmd.Flags().GetString("p")
+		filePath, _ := cmd.Flags().GetString("f")
 
 		fmt.Print("Введите пароль хранилища: ")
 		passwordBytes, err := term.ReadPassword(int(os.Stdin.Fd()))
@@ -55,10 +55,9 @@ var pushCmd = &cobra.Command{
 		}
 
 		remoteCmd := fmt.Sprintf(
-			"yayo-cli add-bulk --project %s --password '%s'",
+			"yayo-cli add-bulk --p %s --pass '%s'",
 			project, password,
 		)
-		fmt.Println("JSON для отправки:", string(data))
 
 		output, err := ssh.RunSSHWithStdin(host, remoteCmd, string(data))
 		if err != nil {
@@ -73,8 +72,8 @@ var pushCmd = &cobra.Command{
 
 func init() {
 	RootCmd.AddCommand(pushCmd)
-	pushCmd.Flags().String("host", "", "SSH host, например root@1.2.3.4")
-	pushCmd.Flags().String("project", "", "Название проекта")
-	pushCmd.Flags().String("service", "", "Название сервиса")
-	pushCmd.Flags().String("file", "", "Путь к .env файлу")
+	pushCmd.Flags().String("h", "", "SSH host, например root@1.2.3.4")
+	pushCmd.Flags().String("p", "", "Название проекта")
+	pushCmd.Flags().String("s", "", "Название сервиса")
+	pushCmd.Flags().String("f", "", "Путь к .env файлу")
 }

@@ -14,11 +14,11 @@ var addBulkCmd = &cobra.Command{
 	Use:   "add-bulk",
 	Short: "Добавляет или обновляет несколько ENV переменных через stdin",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		project, _ := cmd.Flags().GetString("project")
-		password, _ := cmd.Flags().GetString("password")
+		project, _ := cmd.Flags().GetString("p")
+		password, _ := cmd.Flags().GetString("pass")
 
 		if project == "" || password == "" {
-			return fmt.Errorf("необходимо указать --project и --password")
+			return fmt.Errorf("необходимо указать --p и --pass")
 		}
 
 		dbPath := fmt.Sprintf("%s/.yayo/%s/yayo.db", os.Getenv("HOME"), project)
@@ -76,7 +76,7 @@ ON CONFLICT(key, service) DO UPDATE SET value = excluded.value;
 }
 
 func init() {
-	addBulkCmd.Flags().String("project", "", "Название проекта")
-	addBulkCmd.Flags().String("password", "", "Пароль SQLCipher БД")
+	addBulkCmd.Flags().String("p", "", "Название проекта")
+	addBulkCmd.Flags().String("pass", "", "Пароль SQLCipher БД")
 	RootCmd.AddCommand(addBulkCmd)
 }

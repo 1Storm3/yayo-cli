@@ -13,9 +13,9 @@ var destroyCmd = &cobra.Command{
 	Use:   "destroy",
 	Short: "Удаляет локальное зашифрованное хранилище проекта и все связанные файлы",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		project, _ := cmd.Flags().GetString("project")
+		project, _ := cmd.Flags().GetString("p")
 		if project == "" {
-			return fmt.Errorf("необходимо указать --project")
+			return fmt.Errorf("необходимо указать --p")
 		}
 
 		projectDir := filepath.Join(config.BaseDir(), project)
@@ -34,6 +34,6 @@ var destroyCmd = &cobra.Command{
 }
 
 func init() {
-	destroyCmd.Flags().String("project", "", "Название проекта для удаления")
+	destroyCmd.Flags().String("p", "", "Название проекта для удаления")
 	RootCmd.AddCommand(destroyCmd)
 }
