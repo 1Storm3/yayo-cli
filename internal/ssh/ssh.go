@@ -56,9 +56,11 @@ func RunSSHWithStdin(host, command, stdinData string) (string, error) {
 		io.WriteString(stdin, stdinData)
 	}()
 
-	if err := session.Run(command); err != nil {
-		return "", err
-	}
+	var output bytes.Buffer
+	session.Stdout = &output
+	session.Stderr = &output
 
-	return stdout.String(), nil
+	err = session.Run(command)
+
+	return output.String(), err
 }

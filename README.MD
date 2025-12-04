@@ -4,18 +4,9 @@ yayo-cli — CLI утилита для управления ENV переменн
 
 ## Установка
 
-Склонируй репозиторий:
+Установи утилиту:
 
-`git clone github.com/1Storm3/yayo-cli.git`
-
-`cd yayo-cli`
-
-Собери бинарник:
-`go build -o yayo-cli ./cmd`
-
-Перемести бинарник в PATH, если нужно:
-
-`sudo mv yayo-cli /usr/local/bin/`
+`go install github.com/1Storm3/yayo-cli.git`
 
 ## Использование
 Команды
