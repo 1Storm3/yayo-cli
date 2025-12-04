@@ -1,4 +1,4 @@
-package local
+package cmd
 
 import (
 	"bufio"
@@ -8,7 +8,6 @@ import (
 	"os"
 	"strings"
 
-	"github.com/1Storm3/yayo-cli/cmd"
 	_ "github.com/mutecomm/go-sqlcipher/v4"
 	"github.com/spf13/cobra"
 )
@@ -84,5 +83,5 @@ var listEnvCmd = &cobra.Command{
 func init() {
 	listEnvCmd.Flags().String("project", "", "Название проекта")
 	listEnvCmd.Flags().String("service", "", "Фильтр по сервису (необязательно)")
-	cmd.RootCmd.AddCommand(listEnvCmd)
+	RootCmd.AddCommand(listEnvCmd)
 }

@@ -1,10 +1,9 @@
-package remote
+package cmd
 
 import (
 	"fmt"
 	"os"
 
-	"github.com/1Storm3/yayo-cli/cmd"
 	"golang.org/x/term"
 
 	"github.com/1Storm3/yayo-cli/internal/ssh"
@@ -50,5 +49,5 @@ func init() {
 	listEnvSSHCmd.Flags().String("host", "", "SSH host, например root@1.2.3.4")
 	listEnvSSHCmd.Flags().String("project", "", "Название проекта")
 	listEnvSSHCmd.Flags().String("service", "", "Фильтр по сервису (необязательно)")
-	cmd.RootCmd.AddCommand(listEnvSSHCmd)
+	RootCmd.AddCommand(listEnvSSHCmd)
 }

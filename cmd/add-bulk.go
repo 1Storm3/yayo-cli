@@ -1,4 +1,4 @@
-package local
+package cmd
 
 import (
 	"database/sql"
@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/1Storm3/yayo-cli/cmd"
 	_ "github.com/mutecomm/go-sqlcipher/v4"
 	"github.com/spf13/cobra"
 )
@@ -79,5 +78,5 @@ ON CONFLICT(key, service) DO UPDATE SET value = excluded.value;
 func init() {
 	addBulkCmd.Flags().String("project", "", "Название проекта")
 	addBulkCmd.Flags().String("password", "", "Пароль SQLCipher БД")
-	cmd.RootCmd.AddCommand(addBulkCmd)
+	RootCmd.AddCommand(addBulkCmd)
 }

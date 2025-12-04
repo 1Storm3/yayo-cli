@@ -1,11 +1,10 @@
-package remote
+package cmd
 
 import (
 	"encoding/json"
 	"fmt"
 	"os"
 
-	"github.com/1Storm3/yayo-cli/cmd"
 	"golang.org/x/term"
 
 	"github.com/1Storm3/yayo-cli/internal/config"
@@ -73,7 +72,7 @@ var pushCmd = &cobra.Command{
 }
 
 func init() {
-	cmd.RootCmd.AddCommand(pushCmd)
+	RootCmd.AddCommand(pushCmd)
 	pushCmd.Flags().String("host", "", "SSH host, например root@1.2.3.4")
 	pushCmd.Flags().String("project", "", "Название проекта")
 	pushCmd.Flags().String("service", "", "Название сервиса")

@@ -1,11 +1,10 @@
-package local
+package cmd
 
 import (
 	"fmt"
 	"os"
 	"path/filepath"
 
-	"github.com/1Storm3/yayo-cli/cmd"
 	"github.com/1Storm3/yayo-cli/internal/config"
 	"github.com/spf13/cobra"
 )
@@ -36,5 +35,5 @@ var destroyCmd = &cobra.Command{
 
 func init() {
 	destroyCmd.Flags().String("project", "", "Название проекта для удаления")
-	cmd.RootCmd.AddCommand(destroyCmd)
+	RootCmd.AddCommand(destroyCmd)
 }
