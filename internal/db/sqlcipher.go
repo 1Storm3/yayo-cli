@@ -14,21 +14,6 @@ func InitSQLCipher(path, password string) error {
 	}
 	defer db.Close()
 
-	return nil
-}
-
-func Migrations(path, password string) error {
-	db, err := sql.Open("sqlite3", path)
-	if err != nil {
-		return err
-	}
-	defer db.Close()
-
-	_, err = db.Exec(fmt.Sprintf("PRAGMA key = '%s';", password))
-	if err != nil {
-		return err
-	}
-
 	schema := `
 CREATE TABLE IF NOT EXISTS envs (
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -40,5 +25,6 @@ CREATE TABLE IF NOT EXISTS envs (
 	`
 
 	_, err = db.Exec(schema)
-	return err
+
+	return nil
 }

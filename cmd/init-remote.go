@@ -42,10 +42,6 @@ var initCmd = &cobra.Command{
 			return err
 		}
 
-		if err := db.Migrations(dbPath, password); err != nil {
-			return err
-		}
-
 		if err := config.Save(projectName, dbPath); err != nil {
 			return err
 		}

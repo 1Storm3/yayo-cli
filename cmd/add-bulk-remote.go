@@ -26,7 +26,8 @@ var addBulkCmd = &cobra.Command{
 			return fmt.Errorf("база проекта '%s' не найдена", project)
 		}
 
-		sqlDB, err := sql.Open("sqlite3", dbPath)
+		sqlDB, err := sql.Open("sqlite3", fmt.Sprintf("%s?_pragma_key=%s", dbPath, password))
+
 		if err != nil {
 			return fmt.Errorf("не удалось открыть БД: %w", err)
 		}
