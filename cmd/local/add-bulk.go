@@ -1,4 +1,4 @@
-package cmd
+package local
 
 import (
 	"database/sql"
@@ -6,12 +6,13 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/1Storm3/yayo-cli/cmd"
 	_ "github.com/mutecomm/go-sqlcipher/v4"
 	"github.com/spf13/cobra"
 )
 
 var addBulkCmd = &cobra.Command{
-	Use:   "add-bulk-r",
+	Use:   "add-bulk",
 	Short: "Добавляет или обновляет несколько ENV переменных через stdin",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		project, _ := cmd.Flags().GetString("project")
@@ -31,12 +32,8 @@ var addBulkCmd = &cobra.Command{
 		if err != nil {
 			return fmt.Errorf("не удалось открыть БД: %w", err)
 		}
-		defer sqlDB.Close()
 
-		_, err = sqlDB.Exec(fmt.Sprintf("PRAGMA key = '%s';", password))
-		if err != nil {
-			return fmt.Errorf("не удалось установить пароль БД: %w", err)
-		}
+		defer sqlDB.Close()
 
 		var envItems []struct {
 			Key     string `json:"key"`
@@ -82,5 +79,5 @@ ON CONFLICT(key, service) DO UPDATE SET value = excluded.value;
 func init() {
 	addBulkCmd.Flags().String("project", "", "Название проекта")
 	addBulkCmd.Flags().String("password", "", "Пароль SQLCipher БД")
-	rootCmd.AddCommand(addBulkCmd)
+	cmd.RootCmd.AddCommand(addBulkCmd)
 }

@@ -1,9 +1,10 @@
-package cmd
+package remote
 
 import (
 	"fmt"
 	"os"
 
+	"github.com/1Storm3/yayo-cli/cmd"
 	"golang.org/x/term"
 
 	"github.com/1Storm3/yayo-cli/internal/ssh"
@@ -30,7 +31,7 @@ var listEnvSSHCmd = &cobra.Command{
 		}
 		password := string(passwordBytes)
 
-		remoteCmd := fmt.Sprintf("yayo-cli list-r --project %s", project)
+		remoteCmd := fmt.Sprintf("yayo-cli list-envs --project %s", project)
 		if service != "" {
 			remoteCmd += fmt.Sprintf(" --service %s", service)
 		}
@@ -49,5 +50,5 @@ func init() {
 	listEnvSSHCmd.Flags().String("host", "", "SSH host, например root@1.2.3.4")
 	listEnvSSHCmd.Flags().String("project", "", "Название проекта")
 	listEnvSSHCmd.Flags().String("service", "", "Фильтр по сервису (необязательно)")
-	rootCmd.AddCommand(listEnvSSHCmd)
+	cmd.RootCmd.AddCommand(listEnvSSHCmd)
 }

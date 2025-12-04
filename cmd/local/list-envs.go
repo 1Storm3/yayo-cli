@@ -1,4 +1,4 @@
-package cmd
+package local
 
 import (
 	"bufio"
@@ -8,12 +8,13 @@ import (
 	"os"
 	"strings"
 
+	"github.com/1Storm3/yayo-cli/cmd"
 	_ "github.com/mutecomm/go-sqlcipher/v4"
 	"github.com/spf13/cobra"
 )
 
 var listEnvCmd = &cobra.Command{
-	Use:   "list-r",
+	Use:   "list-envs",
 	Short: "Выводит список ENV переменных проекта",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		project, _ := cmd.Flags().GetString("project")
@@ -35,16 +36,12 @@ var listEnvCmd = &cobra.Command{
 			return fmt.Errorf("база проекта '%s' не найдена", project)
 		}
 
-		sqlDB, err := sql.Open("sqlite3", dbPath)
+		sqlDB, err := sql.Open("sqlite3", fmt.Sprintf("%s?_pragma_key=%s", dbPath, password))
+
 		if err != nil {
 			return fmt.Errorf("не удалось открыть БД: %w", err)
 		}
 		defer sqlDB.Close()
-
-		_, err = sqlDB.Exec(fmt.Sprintf("PRAGMA key = '%s';", password))
-		if err != nil {
-			return fmt.Errorf("не удалось установить пароль БД: %w", err)
-		}
 
 		query := "SELECT key, value, service FROM envs"
 		var argsQuery []interface{}
@@ -87,5 +84,5 @@ var listEnvCmd = &cobra.Command{
 func init() {
 	listEnvCmd.Flags().String("project", "", "Название проекта")
 	listEnvCmd.Flags().String("service", "", "Фильтр по сервису (необязательно)")
-	rootCmd.AddCommand(listEnvCmd)
+	cmd.RootCmd.AddCommand(listEnvCmd)
 }

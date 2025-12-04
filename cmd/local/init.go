@@ -1,4 +1,4 @@
-package cmd
+package local
 
 import (
 	"bufio"
@@ -7,6 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/1Storm3/yayo-cli/cmd"
 	"github.com/1Storm3/yayo-cli/internal/config"
 	"github.com/1Storm3/yayo-cli/internal/db"
 	"github.com/spf13/cobra"
@@ -71,5 +72,5 @@ var initCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(initCmd)
+	cmd.RootCmd.AddCommand(initCmd)
 }
