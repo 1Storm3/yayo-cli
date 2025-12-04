@@ -65,7 +65,7 @@ var initCmd = &cobra.Command{
 			return err
 		}
 
-		fmt.Println("Хранилище успешно инициализировано!")
+		fmt.Println("Хранилище успешно инициализировано!!")
 		return nil
 	},
 }
